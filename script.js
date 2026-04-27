@@ -2,13 +2,24 @@ const input = document.getElementById("taskInput");
 const addBtn = document.getElementById("addBtn");
 const taskList = document.getElementById("taskList");
 
-// Додати задачу
 addBtn.addEventListener("click", addTask);
 
-// Додати через Enter
 input.addEventListener("keypress", function(e) {
   if (e.key === "Enter") addTask();
 });
+
+function showEmoji(emoji, x, y) {
+  const el = document.createElement("div");
+  el.className = "emoji";
+  el.textContent = emoji;
+
+  el.style.left = x + "px";
+  el.style.top = y + "px";
+
+  document.body.appendChild(el);
+
+  setTimeout(() => el.remove(), 1000);
+}
 
 function addTask() {
   const text = input.value.trim();
@@ -24,14 +35,18 @@ function addTask() {
     <button class="delete-btn">✖</button>
   `;
 
-  // Видалення
-  li.querySelector(".delete-btn").addEventListener("click", () => {
-    li.remove();
+  li.querySelector(".delete-btn").addEventListener("click", (e) => {
+    const rect = e.target.getBoundingClientRect();
+    showEmoji("😢", rect.left, rect.top);
+
+    setTimeout(() => li.remove(), 200);
   });
 
-  // Виконано
-  li.querySelector("input").addEventListener("change", () => {
+  li.querySelector("input").addEventListener("change", (e) => {
     li.classList.toggle("completed");
+
+    const rect = e.target.getBoundingClientRect();
+    showEmoji("🎉", rect.left, rect.top);
   });
 
   taskList.appendChild(li);
