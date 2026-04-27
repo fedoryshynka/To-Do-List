@@ -81,3 +81,21 @@ li.completed span {
 .delete-btn:hover {
   background: darkred;
 }
+
+.emoji {
+  position: fixed;
+  font-size: 24px;
+  pointer-events: none;
+  animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-60px) scale(1.5);
+  }
+}
